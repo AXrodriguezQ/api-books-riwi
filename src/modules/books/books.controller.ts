@@ -1,10 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { PaginationQuery } from './dto/pagination-book.dto';
+import { Book } from './entities/book.entity';
 
 @Controller('books')
 export class BooksController {
+
   constructor(private readonly booksService: BooksService) {}
 
   @Post()
@@ -13,8 +16,8 @@ export class BooksController {
   }
 
   @Get()
-  findAll() {
-    return this.booksService.findAll();
+  findAll(@Query() pagination: PaginationQuery): Promise<Book[]> {
+    return this.booksService.findAll(pagination);
   }
 
   @Get(':id')
