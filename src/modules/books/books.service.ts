@@ -15,7 +15,7 @@ export class BooksService {
 
   async create(createBookDto: CreateBookDto): Promise<string> {
     const book = this.bookRepository.create(createBookDto);
-    return 'book added susseful';
+    return 'book added successfully';
   }
 
   async findAll({ limit, offset }: PaginationQuery): Promise<Book[]> {

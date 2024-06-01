@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import { PaginationQuery } from './dto/pagination-author.dto';
 
 @Controller('authors')
 export class AuthorsController {
@@ -13,8 +14,8 @@ export class AuthorsController {
   }
 
   @Get()
-  findAll() {
-    return this.authorsService.findAll();
+  findAll(@Query() pagination: PaginationQuery) {
+    return this.authorsService.findAll(pagination);
   }
 
   @Get(':id')
