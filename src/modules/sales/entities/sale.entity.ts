@@ -13,6 +13,6 @@ export class Sale {
   bookId: number;
 
   @ManyToOne(() => Book, book => book.sales)
-  @JoinColumn({ name: 'libro_id' })
+  @JoinColumn({ name: 'book_id' })
   book: Book;
 }
